@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        * {
+            padding: 0px;
+            margin: 10px;
+        }
+
+        body {
+            height: 100vh;
+            width: 100vw;
+            background-color: #ffdab9;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M54.627 0l.83.828-1.415 1.415L51.8 0h2.827zM5.373 0l-.83.828L5.96 2.243 8.2 0H5.374zM48.97 0l3.657 3.657-1.414 1.414L46.143 0h2.828zM11.03 0L7.372 3.657 8.787 5.07 13.857 0H11.03zm32.284 0L49.8 6.485 48.384 7.9l-7.9-7.9h2.83zM16.686 0L10.2 6.485 11.616 7.9l7.9-7.9h-2.83zm20.97 0l9.315 9.314-1.414 1.414L34.828 0h2.83zM22.344 0L13.03 9.314l1.414 1.414L25.172 0h-2.83zM32 0l12.142 12.142-1.414 1.414L30 .828 17.272 13.556l-1.414-1.414L28 0h4zM.284 0l28 28-1.414 1.414L0 2.544V0h.284zM0 5.373l25.456 25.455-1.414 1.415L0 8.2V5.374zm0 5.656l22.627 22.627-1.414 1.414L0 13.86v-2.83zm0 5.656l19.8 19.8-1.415 1.413L0 19.514v-2.83zm0 5.657l16.97 16.97-1.414 1.415L0 25.172v-2.83zM0 28l14.142 14.142-1.414 1.414L0 30.828V28zm0 5.657L11.314 44.97 9.9 46.386l-9.9-9.9v-2.828zm0 5.657L8.485 47.8 7.07 49.212 0 42.143v-2.83zm0 5.657l5.657 5.657-1.414 1.415L0 47.8v-2.83zm0 5.657l2.828 2.83-1.414 1.413L0 53.456v-2.83zM54.627 60L30 35.373 5.373 60H8.2L30 38.2 51.8 60h2.827zm-5.656 0L30 41.03 11.03 60h2.828L30 43.858 46.142 60h2.83zm-5.656 0L30 46.686 16.686 60h2.83L30 49.515 40.485 60h2.83zm-5.657 0L30 52.343 22.343 60h2.83L30 55.172 34.828 60h2.83zM32 60l-2-2-2 2h4zM59.716 0l-28 28 1.414 1.414L60 2.544V0h-.284zM60 5.373L34.544 30.828l1.414 1.415L60 8.2V5.374zm0 5.656L37.373 33.656l1.414 1.414L60 13.86v-2.83zm0 5.656l-19.8 19.8 1.415 1.413L60 19.514v-2.83zm0 5.657l-16.97 16.97 1.414 1.415L60 25.172v-2.83zM60 28L45.858 42.142l1.414 1.414L60 30.828V28zm0 5.657L48.686 44.97l1.415 1.415 9.9-9.9v-2.828zm0 5.657L51.515 47.8l1.414 1.413 7.07-7.07v-2.83zm0 5.657l-5.657 5.657 1.414 1.415L60 47.8v-2.83zm0 5.657l-2.828 2.83 1.414 1.413L60 53.456v-2.83zM39.9 16.385l1.414-1.414L30 3.658 18.686 14.97l1.415 1.415 9.9-9.9 9.9 9.9zm-2.83 2.828l1.415-1.414L30 9.313 21.515 17.8l1.414 1.413 7.07-7.07 7.07 7.07zm-2.827 2.83l1.414-1.416L30 14.97l-5.657 5.657 1.414 1.415L30 17.8l4.243 4.242zm-2.83 2.827l1.415-1.414L30 20.626l-2.828 2.83 1.414 1.414L30 23.456l1.414 1.414zM56.87 59.414L58.284 58 30 29.716 1.716 58l1.414 1.414L30 32.544l26.87 26.87z' fill='%23ffffff' fill-opacity='0.8' fill-rule='evenodd'/%3E%3C/svg%3E");
+
+        }
+
+        #nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+        }
+
+        #login {
+            display: flex;
+            justify-content: space-evenly;
+            width: 200px;
+            color: black;
+        }
+
+        .box {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #reviews {
+            display: flex;
+            justify-content: space-evenly;
+            width: 50%;
+            padding: 20px;
+        }
+
+        #loginDropDown {
+            display: none;
+            width: fit-content;
+            height: 350px;
+            position: absolute;
+            left: 78%;
+            top: 20px;
+            z-index: 10;
+        }
+
+        #loginDrop {
+            height: 80px;
+            font-size: 20px;
+        }
+
+        .btn {
+            height: 80px;
+            font-size: 20px;
+        }
+
+        #revloginDrop {
+            height: 100px;
+            width: 200px;
+            margin-top: 25px;
+            border-radius: 10px 10px 50px 50px;
+        }
+
+        #rev {
+            display: none;
+        }
+
+        #revBtn {
+            height: 100px;
+            width: 200px;
+            margin-top: 25px;
+            border-radius: 10px 10px 50px 50px;
+        }
+
+        #top {
+            margin-top: 40px;
+            font-size: 60px;
+        }
+
+        .pic {
+            display: flex;
+            margin: 0px;
+        }
+
+        #info {
+            display: flex;
+            align-items: center;
+        }
+
+        #infotxt {
+            margin-left: 55px;
+        }
+
+        #user {
+            width: 120px;
+            height: 200px;
+            padding: 5px;
+        }
+
+        #revinrevs {
+            border: 1px solid black;
+            display: flex;
+            height: auto;
+            width: 900px;
+        }
+
+        .botrev {
+            display: flex;
+            flex-wrap: wrap;
+            width: 2000px;
+        }
+
+        .btn img {
+            height: 60px;
+            width: 60px;
+
+        }
+
+        h1{
+            font-size:80px;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div id="nav">
+            <a href='/'><img src="{% static 'images/room_42.png' %}" height="90px"></a>
+            {% if request.session.user_id %}
+            <button id="revBtn" class="btn-dark">
+                <h3>Write a review</h3>
+            </button>
+            {% else %}
+            <button id="revloginDrop" class="btn-dark">
+                <h3>Write a review</h3>
+            </button>
+            {% endif %}
+            <div id="login">
+                {% if request.session.user_id %}
+                <a class='btn' href="/logout" style="color:black"> <img src="{% static 'images/well_hell.png' %}" />
+                    Logout</a>
+                {% else %}
+                <button id="loginDrop" class="btn">Log In</button>
+                <a class='btn mt-3' href="/login">Sign Up</a>
+
+                <div id="loginDropDown" class="bg-light p-3">
+                    <form action='/userlogin' method='post'>
+                        <h2 class="text-center">Login</h2>
+                        {% csrf_token %}<br>
+                        <div class="form-group">
+                            <label for="login_email">Email:</label>
+                            <input type='text' name='login_email' class="form-control">
+                            {% for message in messages %}
+                            {% if message.tags == 'login error' %}
+                            {{ message }}
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="form-group">
+                            <label for="login_pw">Password:</label>
+                            <input type='password' name='login_pw' class="form-control">
+                        </div>
+                        {% for message in messages %}
+                        {% if message.tags == 'login error' %}
+                        {{ message }}<br>
+                        {% endif %}
+                        {% endfor %}
+                        <input class="btn-danger" type='submit' value='Log In'>
+                    </form>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div id="main">
+            <h1>{{onerest.name}}</h1>
+            <div class="row m-3">
+                <div class=pic>
+                    <img src="{{onerest.restaurant_image.url}}" height="500px" width="1200px">
+                </div>
+                {% if request.session.user_id == user.id %}
+                <div>
+                    <form style="margin-left: 500px;" id="rev" action="/add_review/{{onerest.id}}/{{user.id}}"
+                        method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        Rating:
+                        <select name="rating" id="rating">
+                            <option value="1">⭐</option>
+                            <option value="2">⭐⭐</option>
+                            <option value="3">⭐⭐⭐</option>
+                            <option value="4">⭐⭐⭐⭐</option>
+                            <option value="5">⭐⭐⭐⭐⭐</option>
+                        </select><br><br>
+                        <textarea id="post" name="review" rows="5"
+                            cols="40">{{ user.first_name }}, write your review here.</textarea><br><br>
+                        {{ revform.as_p }}
+                        <button type="submit">Upload</button>
+                    </form>
+                </div>
+                {% endif %}
+            </div>
+            <div id=info>
+                {% if request.session.user_id %}
+                {% endif %}
+                <div class=map>
+                    {% if onerest.id == 1 %}
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.0427844238543!2d-87.65024388518403!3d41.91343897118199!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd322d33a22bb%3A0xed1db5da10d6043b!2sAlinea!5e0!3m2!1sen!2sus!4v1603249532321!5m2!1sen!2sus"
+                        width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""
+                        aria-hidden="false" tabindex="0"></iframe>
+                    {% endif %}
+                    {% if onerest.id == 2 %}
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d156395.14817806124!2d-90.15347698499029!3d29.982959463751325!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x1cf7cd29d6c919f6!2sDeanie&#39;s%20Seafood%20Restaurant%20%26%20Seafood%20Market!5e0!3m2!1sen!2sus!4v1603304481524!5m2!1sen!2sus"
+                        width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""
+                        aria-hidden="false" tabindex="0"></iframe>
+                    {% endif %}
+                    {% if onerest.id == 3 %}
+                    <!--RR Donut-->
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3437.405875929728!2d-97.6821040848739!3d30.50956028171559!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8644d194c5287ea3%3A0xc29f14e38e0b9618!2sRound%20Rock%20Donuts!5e0!3m2!1sen!2sus!4v1603307880357!5m2!1sen!2sus"
+                        width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""
+                        aria-hidden="false" tabindex="0"></iframe>
+                    {% endif %}
+                    {% if onerest.id == 4 %}
+                    <!--Rafferty's-->
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3229102.675355971!2d-88.79193482230605!3d37.78018218468004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8841c7c6b9532409%3A0xad43eb9117f916f9!2sRafferty&#39;s%20Restaurant%20and%20Bar%20of%20Florence!5e0!3m2!1sen!2sus!4v1603308443613!5m2!1sen!2sus"
+                        width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""
+                        aria-hidden="false" tabindex="0"></iframe>
+                    {% endif %}
+                    {% if onerest.id == 5 %}
+                    <!--Happiest Hour-->
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d430288.03148209!2d-96.78430537806908!3d32.58951705086804!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864e993a436ef36d%3A0x2170c6faeb022b!2sHappiest%20Hour!5e0!3m2!1sen!2sus!4v1603381241086!5m2!1sen!2sus"
+                        width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""
+                        aria-hidden="false" tabindex="0"></iframe>
+                    {% endif %}
+                    {% if onerest.id == 6 %}
+                    <!--Cafe Babareeba-->
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2968.78516841082!2d-87.6508898845576!3d41.91897677921892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd319dc261c5f%3A0x4f45ff51954d8fd5!2sCafe%20Ba-Ba-Reeba*21!5e0!3m2!1sen!2sus!4v1603381188001!5m2!1sen!2sus"
+                        width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""
+                        aria-hidden="false" tabindex="0"></iframe>
+                    {% endif %}
+                    {% if onerest.id == 7 %}
+                    <!--So-->
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3107.7551918218887!2d-77.42599214944181!3d38.83806705794471!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b645029b5e0911%3A0x8606a8c0c89eb90e!2sS%C5%8D%20Korean%20Bbq!5e0!3m2!1sen!2sus!4v1603381179914!5m2!1sen!2sus"
+                        width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""
+                        aria-hidden="false" tabindex="0"></iframe>
+                    {% endif %}
+                    {% if onerest.id == 8 %}
+                    <!--Bubba Gump-->
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d28636118.27510165!2d-112.8291969!3d28.8203987!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xaea828b9e529d5dc!2sBubba%20Gump%20Shrimp%20Co.!5e0!3m2!1sen!2sus!4v1603384188977!5m2!1sen!2sus"
+                        width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""
+                        aria-hidden="false" tabindex="0"></iframe>
+                    {% endif %}
+                    {% if onerest.id == 9 %}
+                    <!--Fuji Steak-->
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d396602.42839065805!2d-84.74155680000003!3d39.050510400000014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8841c6518455244f%3A0x3b612878c8ca7b3a!2sFuji%20Steak%20House!5e0!3m2!1sen!2sus!4v1603384309926!5m2!1sen!2sus"
+                        width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""
+                        aria-hidden="false" tabindex="0"></iframe>
+                    {% endif %}
+                    {% if onerest.id == 10 %}
+                    <!--Thirsty Lion-->
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13403.499494776914!2d-97.1027778!3d32.8750299!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xbe43e869c4a7d69f!2sThirsty%20Lion%20Gastropub%20%26%20Grill-%20Glade%20Parks!5e0!3m2!1sen!2sus!4v1603382021788!5m2!1sen!2sus"
+                        width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""
+                        aria-hidden="false" tabindex="0"></iframe>
+                    {% endif %}
+
+                    {% if onerest.id == 11 %}
+                    <!--Oasis on Lake Travis-->
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13764.293361669612!2d-97.8740631!3d30.405661!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xfd9c86a12c7e4cf5!2sThe%20Oasis%20On%20Lake%20Travis!5e0!3m2!1sen!2sus!4v1603381619762!5m2!1sen!2sus"
+                        width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""
+                        aria-hidden="false" tabindex="0"></iframe>
+                    {% endif %}
+
+                    {% if onerest.id == 12 %}
+                    <!--Chuy's-->
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13746.087532738165!2d-97.6932586!3d30.534556!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf8aa7ff90f4e603b!2sChuy&#39;s!5e0!3m2!1sen!2sus!4v1603382710875!5m2!1sen!2sus"
+                        width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""
+                        aria-hidden="false" tabindex="0"></iframe>
+                    {% endif %}
+
+
+                    {% if onerest.id == 13 %}
+                    <!--Culinary Dropout-->
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13764.604624966038!2d-97.7217066!3d30.403453!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xe12eff88147950fd!2sCulinary%20Dropout!5e0!3m2!1sen!2sus!4v1603384278802!5m2!1sen!2sus"
+                        width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""
+                        aria-hidden="false" tabindex="0"></iframe>
+                    {% endif %}
+
+                    {% if onerest.id == 14 %}
+                    <!--Olive Garden-->
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13421.053575016693!2d-97.0999919!3d32.7587449!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x2661f38b139064f5!2sOlive%20Garden%20Italian%20Restaurant!5e0!3m2!1sen!2sus!4v1603383427142!5m2!1sen!2sus"
+                        width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""
+                        aria-hidden="false" tabindex="0"></iframe>
+                    {% endif %}
+                    {% if onerest.id == 15 %}
+                    <!--Panera-->
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d198493.0349652222!2d-84.83152331163284!3d38.98214118095358!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8841c64b85cefc99%3A0x1c7a9350fd47870d!2sPanera%20Bread!5e0!3m2!1sen!2sus!4v1603385194438!5m2!1sen!2sus"
+                        width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""
+                        aria-hidden="false" tabindex="0"></iframe>
+                    {% endif %}
+                </div>
+                <div id=infotxt>
+                    <h2>Address: {{onerest.address}}</h2><br>
+                    <h2>Location: {{onerest.city}}, {{onerest.state}}</h2><br>
+                    <h2>Food Category: {{onerest.category}}</h2><br>
+                    <h2>Description: {{onerest.desc}}</h2><br>
+                </div>
+            </div>
+            <h2>Reviews:</h2>
+            <div class='botrev row'>
+                {% for rev in onerest.restaurant.all %}
+                <div id=revinrevs class='col-4' style="background-color: whitesmoke;">
+                    <div id="user" class="bg-danger text-white">
+                        <a class ='text-white'href="/user/{{rev.user.id}}">{{ rev.user.first_name }} {{ rev.user.last_name }}</a><br>
+                        {{ rev.user.city }}, {{ rev.user.state }}<br><br>
+                        {% if rev.user.profile_image == "" %}
+                        <img style="height: 80px; width: 80px;" src='{% static "images/default.jpg" %}'>
+                        {% else %}
+                        <img src="{{rev.user.profile_image.url}}" style="width: 80px; height: 80px;">
+                        {% endif %}
+                    </div>
+                    <div class="rev">
+                        {% if rev.rating == 1 %}
+                        Rating: ⭐<br>
+                        {% endif %}
+                        {% if rev.rating == 2 %}
+                        Rating: ⭐⭐<br>
+                        {% endif %}
+                        {% if rev.rating == 3 %}
+                        Rating: ⭐⭐⭐<br>
+                        {% endif %}
+                        {% if rev.rating == 4 %}
+                        Rating: ⭐⭐⭐⭐<br>
+                        {% endif %}
+                        {% if rev.rating == 5 %}
+                        Rating: ⭐⭐⭐⭐⭐ <br>
+                        {% endif %}
+                        {{ rev.review}} </div>
+                    <img src="{{rev.review_image.url}}" style="width: 200px; height:200px; margin-left: 20px;">
+                    <br><br>
+                    {% if rev.user.id == user.id %}
+                    <a href="/delete/{{onerest.id}}/{{rev.id}}">Delete</a>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+    <script>
+
+        $("#loginDrop").click(function () {
+            $("#loginDropDown").toggle()
+        });
+
+        $("#revBtn").click(function () {
+            $("#rev").toggle()
+        });
+
+        $("#revloginDrop").click(function () {
+            $("#loginDropDown").toggle()
+        });
+    </script>
+</body>
+
+</html>
